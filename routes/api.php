@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers as Api;
 use App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers as Api;
 
 Route::post('/login', [Auth\AuthController::class, 'authenticate']);
 

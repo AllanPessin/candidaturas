@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Store\StoreStatusRequest;
+use App\Http\Requests\Update\StatusUpdateRequest;
+use App\Http\Resources\StatusResource;
 use App\Models\Status;
-use Illuminate\Http\Request;
 
 class StatusController extends Controller
 {
@@ -13,7 +14,7 @@ class StatusController extends Controller
      */
     public function index()
     {
-        //
+        return StatusResource::collection(Status::all());
     }
 
     /**
@@ -33,7 +34,7 @@ class StatusController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Status $status)
     {
         //
     }
@@ -41,9 +42,12 @@ class StatusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StatusUpdateRequest $request, Status $status)
     {
-        //
+        $validated = $request->validated();
+        $status->update($validated);
+
+        return new StatusResource($status);
     }
 
     /**
