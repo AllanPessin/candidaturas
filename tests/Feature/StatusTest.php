@@ -103,8 +103,6 @@ class StatusTest extends TestCase
                 ],
             ])
             ->assertJsonCount(2, 'data');
-        // ->assertJsonFragment(['name' => 'Active'])
-        // ->assertJsonMissing(['name' => 'Inactive']);
     }
 
     public function test_list_one_status()
@@ -146,5 +144,52 @@ class StatusTest extends TestCase
         $this->assertDatabaseMissing('statuses', [
             'id' => $status->id,
         ]);
+    }
+
+    public function test_cannot_create_duplicated_status_name()
+    {
+        Sanctum::actingAs(
+            User::factory()->create(),
+            ['*']
+        );
+
+        Status::factory()->create(['name' => 'Unique Status']);
+
+        $response = $this->postJson('/api/statuses', [
+            'name' => 'Unique Status',
+        ]);
+
+        $response->assertUnprocessable()
+            ->assertJsonValidationErrors(['name']);
+    }
+
+    public function test_cannot_update_status_to_existing_name()
+    {
+        Sanctum::actingAs(
+            User::factory()->create(),
+            ['*']
+        );
+
+        $status1 = Status::factory()->create(['name' => 'Status One']);
+        $status2 = Status::factory()->create(['name' => 'Status Two']);
+
+        $response = $this->putJson("/api/statuses/{$status2->id}", [
+            'name' => 'Status One',
+        ]);
+
+        $response->assertUnprocessable()
+            ->assertJsonValidationErrors(['name']);
+    }
+
+    public function test_cannot_delete_non_existent_status()
+    {
+        Sanctum::actingAs(
+            User::factory()->create(),
+            ['*']
+        );
+
+        $response = $this->deleteJson('/api/statuses/999');
+
+        $response->assertStatus(404);
     }
 }
