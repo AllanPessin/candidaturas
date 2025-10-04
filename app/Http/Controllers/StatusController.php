@@ -16,7 +16,7 @@ class StatusController extends Controller
     public function index(Request $request)
     {
         $statuses = Status::when($request->search, function ($query) use ($request) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%'.$request->search.'%');
         })
             ->get();
 

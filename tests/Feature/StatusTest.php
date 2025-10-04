@@ -98,7 +98,7 @@ class StatusTest extends TestCase
                 'data' => [
                     [
                         'id' => 1,
-                        'name' => 'Active'
+                        'name' => 'Active',
                     ],
                 ],
             ])
