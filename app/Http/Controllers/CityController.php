@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Store\StoreCityRequest;
-use App\Http\Requests\Update\UpdateCityRequest;
 use App\Http\Resources\CityResource;
 use App\Models\City;
 use Illuminate\Http\Request;
@@ -48,13 +47,9 @@ class CityController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCityRequest $request, City $city)
+    public function update()
     {
-        $validated = $request->validated();
-
-        $city->updated($validated);
-
-        return new CityResource($city);
+        //
     }
 
     /**

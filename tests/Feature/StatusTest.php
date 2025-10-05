@@ -20,10 +20,7 @@ class StatusTest extends TestCase
 
     public function test_authenticated_user_can_create_statuses()
     {
-        Sanctum::actingAs(
-            User::factory()->create(),
-            ['*']
-        );
+        $this->authenticated();
 
         $response = $this->postJson('/api/statuses', [
             'name' => 'New Status',
@@ -34,10 +31,7 @@ class StatusTest extends TestCase
 
     public function test_list_statuses()
     {
-        Sanctum::actingAs(
-            User::factory()->create(),
-            ['*']
-        );
+        $this->authenticated();
 
         $status = Status::factory()->create();
 
@@ -56,10 +50,7 @@ class StatusTest extends TestCase
 
     public function test_authenticated_user_can_update_status()
     {
-        Sanctum::actingAs(
-            User::factory()->create(),
-            ['*']
-        );
+        $this->authenticated();
 
         $status = Status::factory()->create(['name' => 'New Status']);
 
@@ -83,10 +74,7 @@ class StatusTest extends TestCase
 
     public function test_status_can_be_searchable()
     {
-        Sanctum::actingAs(
-            User::factory()->create(),
-            ['*']
-        );
+        $this->authenticated();
 
         Status::factory()->create(['name' => 'Active']);
         Status::factory()->create(['name' => 'Inactive']);
@@ -107,10 +95,7 @@ class StatusTest extends TestCase
 
     public function test_list_one_status()
     {
-        Sanctum::actingAs(
-            User::factory()->create(),
-            ['*']
-        );
+        $this->authenticated();
 
         $status = Status::factory()->create();
 
@@ -127,10 +112,7 @@ class StatusTest extends TestCase
 
     public function test_delete_status()
     {
-        Sanctum::actingAs(
-            User::factory()->create(),
-            ['*']
-        );
+        $this->authenticated();
 
         $status = Status::factory()->create();
 
@@ -148,10 +130,7 @@ class StatusTest extends TestCase
 
     public function test_cannot_create_duplicated_status_name()
     {
-        Sanctum::actingAs(
-            User::factory()->create(),
-            ['*']
-        );
+        $this->authenticated();
 
         Status::factory()->create(['name' => 'Unique Status']);
 
@@ -165,10 +144,7 @@ class StatusTest extends TestCase
 
     public function test_cannot_update_status_to_existing_name()
     {
-        Sanctum::actingAs(
-            User::factory()->create(),
-            ['*']
-        );
+        $this->authenticated();
 
         $status1 = Status::factory()->create(['name' => 'Status One']);
         $status2 = Status::factory()->create(['name' => 'Status Two']);
@@ -183,10 +159,7 @@ class StatusTest extends TestCase
 
     public function test_cannot_delete_non_existent_status()
     {
-        Sanctum::actingAs(
-            User::factory()->create(),
-            ['*']
-        );
+        $this->authenticated();
 
         $response = $this->deleteJson('/api/statuses/999');
 

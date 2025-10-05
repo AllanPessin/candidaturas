@@ -41,4 +41,15 @@ class AuthTest extends TestCase
 
         $response->assertStatus(401);
     }
+
+    public function test_user_can_logout()
+    {
+        $this->authenticated();
+
+        $response = $this->postJson('/api/logout');
+
+        $response->assertOk()->assertJson([
+            'message' => 'Logged out successfully',
+        ]);
+    }
 }
