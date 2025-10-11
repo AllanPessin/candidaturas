@@ -10,7 +10,7 @@ class CityUnitTest extends TestCase
 {
     public function test_store_city(): void
     {
-        $storeCityReqeust = new StoreCityRequest();
+        $storeCityReqeust = new StoreCityRequest;
 
         $this->assertSame([
             'name' => 'required|string|max:255|unique:cities,name',
@@ -19,10 +19,16 @@ class CityUnitTest extends TestCase
 
     public function test_update_city()
     {
-        $updateCityRequest = new UpdateCityRequest();
+        $updateCityRequest = new UpdateCityRequest;
 
         $this->assertSame([
             'name' => 'required|string|max:255|unique:cities,name',
         ], $updateCityRequest->rules());
+    }
+
+    public function test_authorize_update_returns_true()
+    {
+        $updateCityRequest = new UpdateCityRequest;
+        $this->assertTrue($updateCityRequest->authorize());
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Store\StoreCityRequest;
+use App\Http\Requests\Update\UpdateCityRequest;
 use App\Http\Resources\CityResource;
 use App\Models\City;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class CityController extends Controller
     public function index(Request $request)
     {
         $cities = City::when($request->search, function ($query) use ($request) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%'.$request->search.'%');
         })
             ->get();
 
@@ -47,16 +48,23 @@ class CityController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update()
+    public function update(UpdateCityRequest $request, City $city)
     {
-        //
+        $validated = $request->validated();
+        $city->update($validated);
+
+        return new CityResource($city);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(City $city)
     {
-        //
+        $city->delete();
+
+        return response()->json([
+            'message' => 'City deleted successfully',
+        ]);
     }
 }

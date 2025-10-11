@@ -3,8 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\City;
-use App\Models\User;
-use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class CityTest extends TestCase
@@ -49,7 +47,7 @@ class CityTest extends TestCase
             'data' => [
                 [
                     'id' => 1,
-                    'name' => 'City One'
+                    'name' => 'City One',
                 ],
             ],
         ])
@@ -71,7 +69,7 @@ class CityTest extends TestCase
             ->assertJson([
                 'data' => [
                     'id' => $cityOne->id,
-                    'name' => 'City One'
+                    'name' => 'City One',
                 ],
             ]);
     }
@@ -84,5 +82,72 @@ class CityTest extends TestCase
 
         $response->assertOK()
             ->assertJsonCount(0, 'data');
+    }
+
+    public function test_update_city()
+    {
+        $this->authenticated();
+
+        $city = City::factory()->create(['name' => 'City One']);
+
+        $reponse = $this->putJson("/api/cities/{$city->id}", [
+            'name' => 'City upated',
+        ]);
+
+        $reponse->assertOk()
+            ->assertJson([
+                'data' => [
+                    'id' => $city->id,
+                    'name' => 'City upated',
+                ],
+            ]);
+    }
+
+    public function test_cannot_update_city_to_existing_name()
+    {
+        $this->authenticated();
+
+        $cityOne = City::factory()->create(['name' => 'City One']);
+        $cityTwo = City::factory()->create(['name' => 'City Two']);
+
+        $this->putJson("/api/cities/{$cityTwo->id}", [
+            'name' => 'City One',
+
+        ])
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors(['name']);
+    }
+
+    public function test_cannot_create_duplicated_city_name()
+    {
+        $this->authenticated();
+
+        $city = City::factory()->create(['name' => 'Unique city']);
+
+        $this->postJson('/api/cities', [
+            'name' => 'Unique city',
+        ])
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors(['name']);
+    }
+
+    public function test_delete_city()
+    {
+        $this->authenticated();
+
+        $city = City::factory()->create();
+
+        $this->deleteJson("/api/cities/{$city->id}")
+            ->assertOk()
+            ->assertJson([
+                'message' => 'City deleted successfully',
+            ]);
+    }
+
+    public function test_cannot_delete_non_existing_city()
+    {
+        $this->authenticated();
+        $this->deleteJson('/api/cities/999')
+            ->assertNotFound();
     }
 }

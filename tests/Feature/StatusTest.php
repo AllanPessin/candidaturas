@@ -3,8 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\Status;
-use App\Models\User;
-use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class StatusTest extends TestCase
@@ -146,10 +144,10 @@ class StatusTest extends TestCase
     {
         $this->authenticated();
 
-        $status1 = Status::factory()->create(['name' => 'Status One']);
-        $status2 = Status::factory()->create(['name' => 'Status Two']);
+        $statusOne = Status::factory()->create(['name' => 'Status One']);
+        $statusTwo = Status::factory()->create(['name' => 'Status Two']);
 
-        $response = $this->putJson("/api/statuses/{$status2->id}", [
+        $response = $this->putJson("/api/statuses/{$statusTwo->id}", [
             'name' => 'Status One',
         ]);
 
