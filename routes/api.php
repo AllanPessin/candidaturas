@@ -12,6 +12,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('statuses', Api\StatusController::class);
     Route::apiResource('cities', Api\CityController::class);
+    Route::apiResource('categories', Api\CategoryController::class);
 });
 
 // Route::get('/user', function (Request $request) {

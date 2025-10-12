@@ -16,7 +16,7 @@ class CityController extends Controller
     public function index(Request $request)
     {
         $cities = City::when($request->search, function ($query) use ($request) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%'.$request->search.'%');
         })
             ->get();
 
@@ -51,8 +51,7 @@ class CityController extends Controller
     public function update(UpdateCityRequest $request, City $city)
     {
         $validated = $request->validated();
-
-        $city->updated($validated);
+        $city->update($validated);
 
         return new CityResource($city);
     }
@@ -60,8 +59,12 @@ class CityController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(City $city)
     {
-        //
+        $city->delete();
+
+        return response()->json([
+            'message' => 'City deleted successfully',
+        ]);
     }
 }
