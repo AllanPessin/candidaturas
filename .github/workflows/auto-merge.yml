@@ -1,4 +1,4 @@
-name: Auto pull request from Develop to Main
+name: Auto pull request from develop to main
 
 on:
   workflow_run:
