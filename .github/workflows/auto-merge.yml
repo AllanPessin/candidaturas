@@ -1,4 +1,4 @@
-name: Auto pull request from develop to main
+name: Auto merge develop into main
 
 on:
   workflow_run:
@@ -8,10 +8,9 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
-  create-pr:
+  merge:
     if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'develop' }}
     runs-on: ubuntu-latest
 
@@ -19,19 +18,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - name: Fetch develop branch
+      - name: Configure Git
         run: |
-          git fetch origin develop:develop
-          git fetch origin main:main
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Create Pull Request from develop to main
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: main
-          branch: develop
-          title: "Auto PR: Merge develop into main"
-          body: "Este Pull Request foi criado automaticamente após os testes na branch develop."
-          draft: false
+      - name: Fetch branches
+        run: |
+          git fetch origin main
+          git fetch origin develop
+
+      - name: Merge develop into main
+        run: |
+          git checkout main
+          git merge origin/develop --no-edit
+
+      - name: Push changes to main
+        run: git push origin main
