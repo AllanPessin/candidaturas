@@ -23,6 +23,8 @@ class StoreCityRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255|unique:cities,name',
+            'state' => 'nullable|string|max:255',
+            'country' => 'nullable|string|max:255',
         ];
     }
 }

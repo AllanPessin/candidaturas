@@ -11,5 +11,5 @@ class City extends Model
 
     protected $table = 'cities';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'state', 'country'];
 }

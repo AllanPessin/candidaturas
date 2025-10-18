@@ -14,6 +14,8 @@ class CityUnitTest extends TestCase
 
         $this->assertSame([
             'name' => 'required|string|max:255|unique:cities,name',
+            'state' => 'nullable|string|max:255',
+            'country' => 'nullable|string|max:255',
         ], $storeCityReqeust->rules());
     }
 
@@ -23,6 +25,8 @@ class CityUnitTest extends TestCase
 
         $this->assertSame([
             'name' => 'required|string|max:255|unique:cities,name',
+            'state' => 'nullable|string|max:255',
+            'country' => 'nullable|string|max:255',
         ], $updateCityRequest->rules());
     }
 
