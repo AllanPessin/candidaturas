@@ -18,6 +18,8 @@ class CityFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'state' => $this->faker->citySuffix(),
+            'country' => $this->faker->country(),
         ];
     }
 }

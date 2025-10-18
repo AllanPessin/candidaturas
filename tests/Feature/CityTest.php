@@ -88,10 +88,16 @@ class CityTest extends TestCase
     {
         $this->authenticated();
 
-        $city = City::factory()->create(['name' => 'City One']);
+        $city = City::factory()->create([
+            'name' => 'City One',
+            'state' => 'BA',
+            'country' => 'USA',
+        ]);
 
         $reponse = $this->putJson("/api/cities/{$city->id}", [
             'name' => 'City upated',
+            'state' => 'SP',
+            'country' => 'Brasil',
         ]);
 
         $reponse->assertOk()
@@ -99,6 +105,8 @@ class CityTest extends TestCase
                 'data' => [
                     'id' => $city->id,
                     'name' => 'City upated',
+                    'state' => 'SP',
+                    'country' => 'Brasil',
                 ],
             ]);
     }

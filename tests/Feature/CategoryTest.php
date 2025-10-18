@@ -128,7 +128,7 @@ class CategoryTest extends TestCase
             ]);
 
         $this->assertDatabaseMissing('categories', [
-            'slug' => $category->slug
+            'slug' => $category->slug,
         ]);
     }
 
