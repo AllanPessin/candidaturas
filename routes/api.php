@@ -17,6 +17,7 @@ Route::middleware('auth:sanctum')->group(function () {
         ->name('modalities.destroy-many');
     Route::apiResource('modalities', Api\ModalitiesController::class);
     Route::apiResource('companies', Api\CompanyController::class);
+    Route::apiResource('contracts', Api\ContractController::class);
 });
 
 // Route::get('/user', function (Request $request) {

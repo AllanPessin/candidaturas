@@ -132,7 +132,7 @@ class CategoryTest extends TestCase
         ]);
     }
 
-    public function test_canoot_create_duplicated_category_slug()
+    public function test_cannot_create_duplicated_category_slug()
     {
         $this->authenticated();
 
