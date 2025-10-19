@@ -80,17 +80,28 @@ class CompanyTest extends TestCase
     {
         $this->authenticated();
 
-        Company::factory()->count(3)->create();
+        Company::factory()->count(11)->create();
 
         $response = $this->getJson('/api/companies');
 
         $response->assertOK()
-            ->assertJsonCount(3, 'data')
+            ->assertJsonCount(10, 'data')
             ->assertJsonStructure([
                 'data' => [
                     '*' => ['id', 'name', 'website', 'contact'],
                 ],
+                'links' => ['first', 'last', 'prev', 'next'],
+                'meta' => [
+                    'current_page',
+                    'from',
+                    'last_page',
+                    'links' => [
+                        '*' => ['url', 'label', 'page', 'active'],
+                    ],
+                ],
             ]);
+        $this->assertEquals(1, $response->json('meta.current_page'));
+        $this->assertEquals(2, $response->json('meta.last_page'));
     }
 
     public function test_update_companies()
