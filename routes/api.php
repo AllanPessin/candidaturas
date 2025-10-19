@@ -13,6 +13,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('statuses', Api\StatusController::class);
     Route::apiResource('cities', Api\CityController::class);
     Route::apiResource('categories', Api\CategoryController::class);
+    Route::delete('modalities/destroy-many', [Api\ModalitiesController::class, 'destroyMany'])
+        ->name('modalities.destroy-many');
+    Route::apiResource('modalities', Api\ModalitiesController::class);
 });
 
 // Route::get('/user', function (Request $request) {
