@@ -17,7 +17,7 @@ class ModalitiesController extends Controller
     public function index(Request $request)
     {
         $modalities = Modalities::when($request->search, function ($query) use ($request) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%'.$request->search.'%');
         })
             ->get();
 

@@ -165,7 +165,7 @@ class ModalitiesTest extends TestCase
             'ids' => [
                 4,
                 5,
-                6
+                6,
             ],
         ])
             ->assertUnprocessable()
@@ -175,7 +175,7 @@ class ModalitiesTest extends TestCase
                     'ids.0' => ['The selected ids.0 is invalid.'],
                     'ids.1' => ['The selected ids.1 is invalid.'],
                     'ids.2' => ['The selected ids.2 is invalid.'],
-                ]
+                ],
             ]);
     }
 }

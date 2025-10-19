@@ -18,7 +18,7 @@ class CityController extends Controller
         $cities = City::when($request->search, function ($query) use ($request) {
             $query->where('name', 'like', '%'.$request->search.'%');
         })
-            ->get();
+            ->paginate(10);
 
         return CityResource::collection($cities);
     }
