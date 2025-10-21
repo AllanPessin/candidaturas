@@ -7,6 +7,7 @@ use App\Http\Requests\Update\UpdateModalitiesRequest;
 use App\Http\Resources\ModalitiesResource;
 use App\Models\Modalities;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class ModalitiesController extends Controller
@@ -72,12 +73,25 @@ class ModalitiesController extends Controller
     public function destroyMany(Request $request)
     {
         try {
-            $validated = $request->validate([
+            $idsParam = $request->query('ids');
+            if (! $idsParam) {
+                return response()->json([
+                    'message' => 'No IDs provided.',
+                ], 400);
+            }
+
+            $ids = array_filter(explode(',', $idsParam), fn ($id) => is_numeric($id));
+
+            $validator = Validator::make(['ids' => $ids], [
                 'ids' => 'required|array',
                 'ids.*' => 'integer|exists:modalities,id',
             ]);
 
-            Modalities::destroy($validated['ids']);
+            if ($validator->fails()) {
+                throw new ValidationException($validator);
+            }
+
+            Modalities::destroy($ids);
 
             return response()->json([
                 'message' => 'Modalities deleted successfully',
