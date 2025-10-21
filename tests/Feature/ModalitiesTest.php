@@ -140,13 +140,7 @@ class ModalitiesTest extends TestCase
         $modalities2 = Modalities::factory()->create();
         $modalities3 = Modalities::factory()->create();
 
-        $this->deleteJson('/api/modalities/destroy-many', [
-            'ids' => [
-                $modalities1->id,
-                $modalities2->id,
-                $modalities3->id,
-            ],
-        ])
+        $this->deleteJson("/api/modalities/destroy-many?ids=$modalities1->id,$modalities2->id,$modalities3->id,")
             ->assertJson([
                 'message' => 'Modalities deleted successfully',
             ])
@@ -161,13 +155,7 @@ class ModalitiesTest extends TestCase
         $modalities2 = Modalities::factory()->create(['id' => 2]);
         $modalities3 = Modalities::factory()->create(['id' => 3]);
 
-        $this->deleteJson('/api/modalities/destroy-many', [
-            'ids' => [
-                4,
-                5,
-                6,
-            ],
-        ])
+        $this->deleteJson("/api/modalities/destroy-many?ids=997,998,999")
             ->assertUnprocessable()
             ->assertJson([
                 'message' => 'Some IDs do not exist in database',
