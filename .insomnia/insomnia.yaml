@@ -646,12 +646,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: http://candidaturas.test/api/categories/1
+      - url: http://candidaturas.test/api/categories/categoria-teste
         name: destroy
         meta:
           id: req_862ab976a3c84cfebb57e3ccd12920c7
           created: 1760450241678
-          modified: 1760877587003
+          modified: 1761053088273
           isPrivate: false
           description: ""
           sortKey: -1758463610559.75
@@ -685,12 +685,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: http://candidaturas.test/api/categories/1
+      - url: http://candidaturas.test/api/categories/categoria-teste
         name: show
         meta:
           id: req_836f7b2b77dc48399a26c562bab3434a
           created: 1760450241679
-          modified: 1760877581076
+          modified: 1761053078629
           isPrivate: false
           description: ""
           sortKey: -1758463613452.3125
@@ -737,7 +737,7 @@ collection:
         meta:
           id: req_40b24aec33dd4d26953491e0df2a3cfa
           created: 1760812432306
-          modified: 1760877610195
+          modified: 1761052262968
           isPrivate: false
           description: ""
           sortKey: -1758463622130
@@ -746,7 +746,7 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"name": "modalidade3"
+            	"name": "modalidade2"
             }
         headers:
           - name: Content-Type
@@ -935,22 +935,19 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: http://candidaturas.test/api/modalities/destroy-many
+      - url: http://candidaturas.test/api/modalities/destroy-many?ids=8,9
         name: destroy many
         meta:
           id: req_dbd3afd5809a4181a787106c72dba4ae
           created: 1760812536385
-          modified: 1760877628807
+          modified: 1761052315742
           isPrivate: false
           description: ""
           sortKey: -1758463608631.375
         method: DELETE
         body:
           mimeType: application/json
-          text: |-
-            {
-            	"ids": [4, 5]
-            }
+          text: ""
         headers:
           - name: Content-Type
             value: application/json
