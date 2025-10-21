@@ -2,7 +2,7 @@ name: Auto merge develop into main
 
 on:
   workflow_run:
-    workflows: ["Run Tests"]
+    workflows: ["Run Tests", "Fix Code Style"]
     types:
       - completed
 
