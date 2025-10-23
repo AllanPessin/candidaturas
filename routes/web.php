@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // return view('welcome');
-    return response("api works fine!");
+    return response('api works fine!');
 });
 
 Route::prefix('docs')->group(function () {
