@@ -1,6 +1,15 @@
 # Candidaturas
 
-Este projeto é uma API para gerenciamento de candidaturas, empresas, cidades, categorias, modalidades, contratos e status.
+<div align="center">
+    <a href="https://github.com/AllanPessin/candidaturas/actions/workflows/tests.yml">
+        <img src="https://github.com/AllanPessin/candidaturas/actions/workflows/tests.yml/badge.svg" alt="Tests">
+    </a>
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/AllanPessin/candidaturas">
+    <img alt="Static Badge" src="https://img.shields.io/badge/license-MIT-green"/>
+</div>
+
+## Sobre 
+Este projeto é uma API para gerenciamento de candidaturas, empresas, cidades, categorias, modalidades e status.
 
 ## Requisitos
 
@@ -62,3 +71,7 @@ Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de
 ## Licença
 
 Software de código aberto licenciado sob a [MIT license](https://choosealicense.com/licenses/mit/)
+
+
+
+
