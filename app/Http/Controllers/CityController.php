@@ -16,7 +16,7 @@ class CityController extends Controller
     public function index(Request $request)
     {
         $cities = City::when($request->search, function ($query) use ($request) {
-            $query->where('name', 'like', '%'.$request->search.'%');
+            $query->where('name', 'like', '%' . $request->search . '%');
         })
             ->paginate(10);
 
