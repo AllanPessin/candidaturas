@@ -75,3 +75,10 @@ Software de código aberto licenciado sob a [MIT license](https://choosealicense
 
 
 
+status: Aplicado, entrevista, aceito, rejeitado
+cities: cidade da vaga
+categories: area da vaga(TI, Designer)
+modalities: remoto, presencial, hibrido
+companies: empresa referente a vaga
+contracts: PJ ou CLT
+application: Cadastro da vaga
