@@ -18,6 +18,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('modalities', Api\ModalitiesController::class);
     Route::apiResource('companies', Api\CompanyController::class);
     Route::apiResource('contracts', Api\ContractController::class);
+    Route::apiResource('applications', Api\ApplicationController::class);
 });
 
 // Route::get('/user', function (Request $request) {

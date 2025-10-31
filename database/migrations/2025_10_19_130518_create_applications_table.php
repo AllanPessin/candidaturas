@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('link');
             $table->string('contact')->nullable();
             $table->date('applied_date');
-            $table->string('interview_date')->nullable();
+            $table->date('interview_date')->nullable();
             $table->decimal('salary', total: 8, places: 2)->nullable();
             $table->text('feedback')->nullable();
             $table->foreignId('status_id')->constrained('statuses');
